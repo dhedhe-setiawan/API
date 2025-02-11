@@ -25,3 +25,5 @@ export const del = async (req, res) => {
 
   return response(res, 200, `Hapus Data Pegawai id: ${id} `);
 };
+
+//
