@@ -1,4 +1,4 @@
-import query from '../config/connect.js';
+import query from '../utils/query.js';
 import response from '../middleware/response.js';
 
 export const getAll = async (req, res) => {

@@ -1,7 +1,10 @@
 import asyncHandler from '../utils/asyncHandler.js';
+import query from '../utils/query.js';
 
 export const getAll = asyncHandler(async (req, res) => {
-  return res.success('Tampilkan Semua Data Pegawai');
+  const pegawai = await query('SELECT * FROM pegawai');
+
+  return res.success('Tampilkan Semua Data Pegawai', pegawai);
 });
 
 export const get = async (req, res) => {
