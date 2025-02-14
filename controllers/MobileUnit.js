@@ -1,5 +1,5 @@
-import query from '../connect.js';
-import response from '../response.js';
+import query from '../config/connect.js';
+import response from '../middleware/response.js';
 
 export const getAll = async (req, res) => {
   try {
