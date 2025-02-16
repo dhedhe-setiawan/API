@@ -11,13 +11,13 @@ export const getAll = catchError(async (req, res) => {
 });
 
 export const get = catchError(async (req, res) => {
-  const result = await selectData('pegawai', req.params);
+  const result = await selectData('pegawai', req.params, '=');
   if (result.length <= 0) throwError(404);
 
   return res.success(200, result);
 });
 
-export const post = catchError(async (req, res, next) => {
+export const post = catchError(async (req, res) => {
   const data = req.body;
 
   if (!data.password) throwError(400, 'Password kosong');

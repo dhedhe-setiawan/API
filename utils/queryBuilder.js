@@ -27,7 +27,7 @@ export const selectData = async (table, filters = {}, cond = 'LIKE', join = 'AND
     queryStr += ` WHERE ${conditions.join(` ${join} `)}`;
   }
 
-  return query(queryStr, values);
+  return await query(queryStr, values);
 };
 
 export const insertData = async (table, data) => {
@@ -37,10 +37,10 @@ export const insertData = async (table, data) => {
 
   const queryStr = `INSERT INTO ${table} (${fields.join(', ')}) VALUES (${placeholders})`;
 
-  return query(queryStr, values);
+  return await query(queryStr, values);
 };
 
-export const updateData = (table, data, id) => {
+export const updateData = async (table, data, id) => {
   let queryStr = `UPDATE \`${table}\` SET ?`;
   const values = [data];
 
@@ -50,10 +50,10 @@ export const updateData = (table, data, id) => {
     queryStr += ` WHERE \`${key}\` = ?`;
   }
 
-  return query(queryStr, values);
+  return await query(queryStr, values);
 };
 
-export const deleteData = (table, id) => {
+export const deleteData = async (table, id) => {
   let queryStr = `DELETE FROM \`${table}\` `;
   const values = [];
 
@@ -63,5 +63,5 @@ export const deleteData = (table, id) => {
     queryStr += ` WHERE \`${key}\` = ?`;
   }
 
-  return query(queryStr, values);
+  return await query(queryStr, values);
 };
