@@ -1,38 +1,45 @@
-import catchError from '../utils/catchError.js';
-import dynamicQuery from '../utils/dynamicQuery.js';
-import query from '../utils/query.js';
-import throwError from '../utils/throwError.js';
+import catchError from '../utils/error/catchError.js';
+import hash from '../utils/hash.js';
+import { deleteData, insertData, selectData, updateData } from '../utils/queryBuilder.js';
+import throwError from '../utils/error/throwError.js';
 
 export const getAll = catchError(async (req, res) => {
-  const { queryStr, values } = dynamicQuery('pegawai', req.query);
+  const result = await selectData('pegawai', req.query);
+  if (result.length <= 0) throwError(404);
 
-  const pegawai = await query(queryStr, values);
-  if (pegawai.length <= 0) throwError(404);
-
-  return res.success(200, pegawai);
+  return res.success(200, result);
 });
 
 export const get = catchError(async (req, res) => {
-  const { id } = req.params;
+  const result = await selectData('pegawai', req.params);
+  if (result.length <= 0) throwError(404);
 
-  const pegawai = await query('SELECT * FROM pegawai WHERE id_pegawai = ?', [id]);
-  if (pegawai.length <= 0) throwError(404);
-
-  return res.success(200, pegawai);
+  return res.success(200, result);
 });
 
-export const post = catchError(async (req, res) => {
-  return res.success('Tambah Data Pegawai');
+export const post = catchError(async (req, res, next) => {
+  const data = req.body;
+
+  if (!data.password) throwError(400, 'Password kosong');
+  data.password = await hash(data.password);
+
+  const result = await insertData('pegawai', data);
+
+  if (result.affectedRows >= 1) return res.success(201);
 });
 
 export const patch = catchError(async (req, res) => {
-  const { id } = req.params;
+  const id = req.params;
+  const data = req.body;
 
-  return res.success(`Edit Data Pegawai id: ${id}`);
+  if (data.password) data.password = await hash(data.password);
+
+  const result = await updateData('pegawai', data, id);
+  if (result.affectedRows >= 1) return res.success(201);
 });
 
 export const del = catchError(async (req, res) => {
-  const { id } = req.params;
+  const result = await deleteData('pegawai', req.params);
 
-  return res.success(`Hapus Data Pegawai id: ${id} `);
+  if (result.affectedRows >= 1) return res.success(204);
 });

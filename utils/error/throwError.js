@@ -1,4 +1,4 @@
-import { statusUmum } from './statusCode.js';
+import { statusUmum } from '../statusCode.js';
 
 const throwError = (status, message) => {
   const error = new Error(message || statusUmum[status] || 'Unknown Error');

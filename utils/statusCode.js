@@ -24,32 +24,6 @@ export const statusUmum = {
   504: 'Batas Waktu Gerbang', // Server menunggu terlalu lama dari server lain
 };
 
-export const commonStatus = {
-  // Success Responses (2xx)
-  200: 'OK', // Request was successful
-  201: 'Created', // A new resource was successfully created
-  204: 'No Content', // Request succeeded but no response body
-
-  // Redirection Messages (3xx)
-  301: 'Moved Permanently', // The URL has permanently moved
-  302: 'Found', // Temporary redirect
-  304: 'Not Modified', // Cached data is still valid, no need to re-download
-
-  // Client Error Responses (4xx)
-  400: 'Bad Request', // Invalid request format or parameters
-  401: 'Unauthorized', // Not logged in or invalid token
-  403: 'Forbidden', // No permission to access the resource
-  404: 'Not Found', // Requested resource does not exist
-  405: 'Method Not Allowed', // HTTP method is not allowed
-  429: 'Too Many Requests', // Too many requests in a short time
-
-  // Server Error Responses (5xx)
-  500: 'Internal Server Error', // Server encountered an error
-  502: 'Bad Gateway', // Server received an error response from another server
-  503: 'Service Unavailable', // Server is down or overloaded
-  504: 'Gateway Timeout', // Server waited too long for a response from another server
-};
-
 const statusCode = {
   // Informational Responses (1xx)
   100: 'Continue', // Client should continue with request.
@@ -126,6 +100,32 @@ const statusCode = {
 };
 
 export default statusCode;
+
+export const commonStatus = {
+  // Success Responses (2xx)
+  200: 'OK', // Request was successful
+  201: 'Created', // A new resource was successfully created
+  204: 'No Content', // Request succeeded but no response body
+
+  // Redirection Messages (3xx)
+  301: 'Moved Permanently', // The URL has permanently moved
+  302: 'Found', // Temporary redirect
+  304: 'Not Modified', // Cached data is still valid, no need to re-download
+
+  // Client Error Responses (4xx)
+  400: 'Bad Request', // Invalid request format or parameters
+  401: 'Unauthorized', // Not logged in or invalid token
+  403: 'Forbidden', // No permission to access the resource
+  404: 'Not Found', // Requested resource does not exist
+  405: 'Method Not Allowed', // HTTP method is not allowed
+  429: 'Too Many Requests', // Too many requests in a short time
+
+  // Server Error Responses (5xx)
+  500: 'Internal Server Error', // Server encountered an error
+  502: 'Bad Gateway', // Server received an error response from another server
+  503: 'Service Unavailable', // Server is down or overloaded
+  504: 'Gateway Timeout', // Server waited too long for a response from another server
+};
 
 export const statusCodeID = {
   // Respons Informasional (1xx)

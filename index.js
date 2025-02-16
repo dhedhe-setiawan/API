@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes/routes.js';
 import response from './middleware/response.js';
-import catchError from './middleware/errorHandler.js'; // Tambahkan error handler
+import errorHandler from './middleware/errorHandler.js'; // Tambahkan error handler
 
 const app = express();
 const port = 3000;
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 // Error Handler Middleware
-app.use(catchError); // Tangkap error di satu tempat saja
+app.use(errorHandler); // Tangkap error di satu tempat saja
 
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`);
