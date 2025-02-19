@@ -14,7 +14,7 @@ export const get = catchError(async (req, res) => {
   const result = await selectData('pegawai', req.params, '=');
   if (result.length <= 0) throwError(404);
 
-  return res.success(200, result);
+  return res.success(200, result[0]);
 });
 
 export const post = catchError(async (req, res) => {
@@ -41,5 +41,5 @@ export const patch = catchError(async (req, res) => {
 export const del = catchError(async (req, res) => {
   const result = await deleteData('pegawai', req.params);
 
-  if (result.affectedRows >= 1) return res.success(204);
+  if (result.affectedRows >= 1) return res.success(200);
 });
