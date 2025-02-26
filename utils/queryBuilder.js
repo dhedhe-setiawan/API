@@ -7,24 +7,37 @@ const query = async (sql, values) => {
 
 export default query;
 
-export const selectData = async (table, filters = {}, cond = 'LIKE', join = 'AND') => {
-  let queryStr = `SELECT * FROM \`${table}\``; // Pakai backtick untuk nama tabel agar aman
+export const selectData = async (
+  table,
+  filters = {},
+  sortBy = '',
+  cond = 'LIKE',
+  join = 'AND',
+  sortOrder = 'ASC'
+) => {
+  let queryStr = `SELECT * FROM \`${table}\``; // Pakai backtick untuk keamanan
   const values = [];
 
   if (Object.keys(filters).length > 0) {
     const conditions = Object.keys(filters).map((key) => {
       let value = filters[key];
-      let operator = cond.toUpperCase(); // Pastikan kondisi huruf besar semua (LIKE, =, >, <, dsb.)
+      let operator = cond.toUpperCase();
 
       if (operator === 'LIKE') {
-        value = `%${value}%`; // LIKE hanya cocok untuk pencarian teks
+        value = `%${value}%`;
       }
 
       values.push(value);
-      return `\`${key}\` ${operator} ?`; // Pakai backtick di nama kolom agar aman
+      return `\`${key}\` ${operator} ?`;
     });
 
     queryStr += ` WHERE ${conditions.join(` ${join} `)}`;
+  }
+
+  // Tambahkan SORT BY jika ada
+  if (sortBy) {
+    const safeSortOrder = sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC'; // Hanya ASC/DESC yang diperbolehkan
+    queryStr += ` ORDER BY \`${sortBy}\` ${safeSortOrder}`;
   }
 
   return await query(queryStr, values);
