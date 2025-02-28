@@ -25,7 +25,6 @@ export const login = async (req, res) => {
   const token = jwt.sign(
     {
       id: user[0].id_pegawai,
-      username: user[0].username,
       access: user[0].jabatan,
       nama: user[0].nama,
     },
