@@ -23,7 +23,12 @@ export const login = async (req, res) => {
 
   // Buat token JWT
   const token = jwt.sign(
-    { id: user[0].id_pegawai, username: user[0].username, access: user[0].jabatan },
+    {
+      id: user[0].id_pegawai,
+      username: user[0].username,
+      access: user[0].jabatan,
+      nama: user[0].nama,
+    },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES }
   );
