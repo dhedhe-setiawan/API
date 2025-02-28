@@ -11,12 +11,19 @@ export const selectData = async (
   table,
   filters = {},
   sortBy = '',
+  joinTable = '', // Tambahin nama tabel yang mau di-join
+  joinOn = '', // Tambahin kondisi join, misal "barang_masuk.id_barang = barang.id_barang"
   cond = 'LIKE',
   join = 'AND',
   sortOrder = 'ASC'
 ) => {
-  let queryStr = `SELECT * FROM \`${table}\``; // Pakai backtick untuk keamanan
+  let queryStr = `SELECT * FROM \`${table}\``;
   const values = [];
+
+  // Kalau ada joinTable, tambahin JOIN ke query
+  if (joinTable && joinOn) {
+    queryStr += ` JOIN \`${joinTable}\` ON ${joinOn}`;
+  }
 
   if (Object.keys(filters).length > 0) {
     const conditions = Object.keys(filters).map((key) => {
@@ -36,7 +43,7 @@ export const selectData = async (
 
   // Tambahkan SORT BY jika ada
   if (sortBy) {
-    const safeSortOrder = sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC'; // Hanya ASC/DESC yang diperbolehkan
+    const safeSortOrder = sortOrder.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     queryStr += ` ORDER BY \`${sortBy}\` ${safeSortOrder}`;
   }
 

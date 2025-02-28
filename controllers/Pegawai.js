@@ -41,7 +41,7 @@ export const patch = catchError(async (req, res) => {
 });
 
 export const del = catchError(async (req, res) => {
-  const result = await deleteData('pegawai');
+  const result = await deleteData('pegawai', req.params);
 
   if (result.affectedRows >= 1) return res.success(200, result, 'Hapus Data Berhasil');
 });
