@@ -1,14 +1,14 @@
 {
-  "name": "sidede-api",
+  "name": "backend",
   "version": "1.0.0",
   "description": "Backend API untuk Sistem Informasi Donor Darah UTD-PMI",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api-service": "node --watch index.js"
+    "dev": "node --watch index.js"
   },
-  "author": "",
+  "author": "kuh, de",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,6 +16,21 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.5"
-  }
+    "mysql2": "^3.11.5",
+    "uuid": "^11.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhedhe-setiawan/API.git"
+  },
+  "keywords": [
+    "backend",
+    "api",
+    "sistem",
+    "inventory"
+  ],
+  "bugs": {
+    "url": "https://github.com/dhedhe-setiawan/API/issues"
+  },
+  "homepage": "https://github.com/dhedhe-setiawan/API#readme"
 }
