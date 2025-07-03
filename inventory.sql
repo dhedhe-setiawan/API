@@ -16,7 +16,7 @@
 
 
 -- Dumping database structure for inventory
-CREATE DATABASE IF NOT EXISTS `inventory` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `inventory`;
 USE `inventory`;
 
 -- Dumping structure for table inventory.barang
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `barang` (
   `harga` int NOT NULL,
   PRIMARY KEY (`id_barang`),
   UNIQUE KEY `nama` (`nama`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 ;
 
 -- Dumping data for table inventory.barang: ~7 rows (approximately)
 DELETE FROM `barang`;
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `barang_keluar` (
   PRIMARY KEY (`id_bk`),
   KEY `id_barang` (`id_barang`),
   CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 ;
 
 -- Dumping data for table inventory.barang_keluar: ~21 rows (approximately)
 DELETE FROM `barang_keluar`;
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `barang_masuk` (
   PRIMARY KEY (`id_bm`),
   KEY `id_barang` (`id_barang`),
   CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 ;
 
 -- Dumping data for table inventory.barang_masuk: ~11 rows (approximately)
 DELETE FROM `barang_masuk`;
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `pegawai` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `hp` (`hp`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 ;
 
 -- Dumping data for table inventory.pegawai: ~4 rows (approximately)
 DELETE FROM `pegawai`;
@@ -129,11 +129,11 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jabatan`, `hp`, `email`, `username
 
 -- Dumping structure for table inventory.pesanan
 CREATE TABLE IF NOT EXISTS `pesanan` (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT (now()),
-  `status` enum('Lunas','Gagal','Menunggu') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Menunggu',
+  `status` enum('Lunas','Gagal','Menunggu') CHARACTER SET utf8mb4 NOT NULL DEFAULT 'Menunggu',
   `barang` json NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 -- Dumping data for table inventory.pesanan: ~5 rows (approximately)
 DELETE FROM `pesanan`;
