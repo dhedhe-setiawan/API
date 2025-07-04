@@ -1,24 +1,32 @@
 import catchError from '../utils/error/catchError.js';
 import { deleteData, insertData, selectData, updateData } from '../utils/queryBuilder.js';
 import throwError from '../utils/error/throwError.js';
+import pool from '../config/connect.js';
 
 export const getAll = catchError(async (req, res) => {
-  const { sortBy, sortOrder, ...filters } = req.query;
+  const { sortBy, sortOrder, tahun, bulan, ...filters } = req.query;
 
-  const result = await selectData(
-    'barang_masuk',
-    filters,
-    sortBy,
-    'barang', // Join ke tabel barang
-    'barang_masuk.id_barang = barang.id_barang' // Join condition
+  const [result] = await pool.query(
+    'SELECT * FROM barang_masuk JOIN barang ON barang_masuk.id_barang = barang.id_barang WHERE YEAR(tanggal) = ? AND MONTH(tanggal) = ?',
+    [tahun, bulan]
   );
+
+  // const result = await selectData(
+  //   'barang_masuk',
+  //   filters,
+  //   sortBy,
+  //   'barang', // Join ke tabel barang
+  //   'barang_masuk.id_barang = barang.id_barang' // Join condition
+  // );
 
   if (result.length <= 0) throwError(404);
 
   // Konversi ke UTC+8
-  const formattedData = result.map((item) => ({
+  const formattedData = result.map(item => ({
     ...item,
-    tanggal: new Date(item.tanggal).toLocaleString('id-ID', { timeZone: 'Asia/Makassar' }),
+    tanggal: new Date(item.tanggal).toLocaleString('id-ID', {
+      timeZone: 'Asia/Makassar',
+    }),
   }));
 
   return res.success(200, formattedData);
