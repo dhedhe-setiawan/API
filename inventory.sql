@@ -16,14 +16,15 @@
 
 
 -- Dumping database structure for inventory
-CREATE DATABASE IF NOT EXISTS `inventory`;
+
+CREATE DATABASE IF NOT EXISTS `inventory` /*!40100 DEFAULT CHARACTER SET utf8mb4  */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `inventory`;
 
 -- Dumping structure for table inventory.barang
 CREATE TABLE IF NOT EXISTS `barang` (
   `id_barang` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
-  `kategori` enum('F','D','S') COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(32)  NOT NULL,
+  `kategori` enum('F','D','S')  NOT NULL,
   `stock` int NOT NULL,
   `harga` int NOT NULL,
   PRIMARY KEY (`id_barang`),
@@ -107,12 +108,12 @@ INSERT INTO `barang_masuk` (`id_bm`, `id_barang`, `stock`, `tanggal`) VALUES
 -- Dumping structure for table inventory.pegawai
 CREATE TABLE IF NOT EXISTS `pegawai` (
   `id_pegawai` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
-  `jabatan` enum('M','A','K') COLLATE utf8mb4_general_ci NOT NULL,
-  `hp` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `username` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(32)  NOT NULL,
+  `jabatan` enum('M','A','K')  NOT NULL,
+  `hp` varchar(16)  DEFAULT NULL,
+  `email` varchar(64)  DEFAULT NULL,
+  `username` varchar(16)  NOT NULL,
+  `password` varchar(64)  NOT NULL,
   PRIMARY KEY (`id_pegawai`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `hp` (`hp`),
@@ -129,9 +130,10 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jabatan`, `hp`, `email`, `username
 
 -- Dumping structure for table inventory.pesanan
 CREATE TABLE IF NOT EXISTS `pesanan` (
-  `id` varchar(36) CHARACTER SET utf8mb4 NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4  NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT (now()),
-  `status` enum('Lunas','Gagal','Menunggu') CHARACTER SET utf8mb4 NOT NULL DEFAULT 'Menunggu',
+  `status` enum('Lunas','Gagal','Menunggu') CHARACTER SET utf8mb4  NOT NULL DEFAULT 'Menunggu',
+
   `barang` json NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
