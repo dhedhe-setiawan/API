@@ -16,6 +16,7 @@
 
 
 -- Dumping database structure for inventory
+
 CREATE DATABASE IF NOT EXISTS `inventory` /*!40100 DEFAULT CHARACTER SET utf8mb4  */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `inventory`;
 
@@ -132,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `pesanan` (
   `id` varchar(36) CHARACTER SET utf8mb4  NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT (now()),
   `status` enum('Lunas','Gagal','Menunggu') CHARACTER SET utf8mb4  NOT NULL DEFAULT 'Menunggu',
+
   `barang` json NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
